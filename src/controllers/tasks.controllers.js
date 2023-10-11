@@ -1,5 +1,16 @@
 import Task from '../models/task.model.js'
 
+export const getAlltasks = async (req,res)=>{
+    // const {username,password,email} = req.body;
+    try{
+        const lostal = await Task.find();
+        res.json(lostal);
+    }catch(err){
+        res.send({message:"Sin ti, yo no me siento bien. Na' más de mil en cien. Viviendo y por dentro muerto. Hasta un ciego lo ve"})
+    }
+   
+
+}
 
 export const getTasks = async (req,res)=>{
     try{
