@@ -19,3 +19,5 @@ App.use("/api",authRoutes);
 App.use("/api",taskRoutes);
 
 export default App;
+
+console.log('SO');
