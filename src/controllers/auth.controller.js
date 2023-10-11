@@ -7,6 +7,18 @@ import jwt from 'jsonwebtoken';
 
 import { TOKEN_SECRET } from '../config.js';
 
+export const getAllusers = async (req,res)=>{
+    // const {username,password,email} = req.body;
+    try{
+        const lostal = await User.find();
+        res.json(lostal);
+    }catch(err){
+        res.send({message:"Sin ti, yo no me siento bien. Na' más de mil en cien. Viviendo y por dentro muerto. Hasta un ciego lo ve"})
+    }
+   
+
+}
+
 export const register = async (req,res)=> {
     const {email,password,username} = req.body
     try{
