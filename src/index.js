@@ -2,5 +2,8 @@ import App from './app.js';
 import { conectDB } from './db.js';
 conectDB();
 
-App.listen(4000);
-console.log('hola',4000)
+App.set('port', 3000)
+
+App.listen(App.get('port'), ()=>{
+    console.log('Server on port', App.get('port'))
+});
