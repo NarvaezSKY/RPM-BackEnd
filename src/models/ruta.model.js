@@ -40,7 +40,12 @@ const rutaSchema = new mongoose.Schema({
     desc_parada:{
         type: String,
         required: true,
-    }
+     },
+    // motoviajero:{
+    //     type: mongoose.Schema.ObjectId,
+    //     ref:'motovijero',
+    //     required: true
+    // }
 },{
     timestamps:true
 }
