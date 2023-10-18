@@ -1,7 +1,7 @@
 import mongoose  from "mongoose";
 
 const presupuesto = new mongoose.Schema({
-    conbustible_presu:{
+    combustible_presu:{
         type: Number,
         required: true,
 
@@ -28,4 +28,4 @@ const presupuesto = new mongoose.Schema({
 }
 );
 
-export default mongoose.model('Task',presupuesto);
+export default mongoose.model('Ppto',presupuesto);
