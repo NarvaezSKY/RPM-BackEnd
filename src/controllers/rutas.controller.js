@@ -1,6 +1,6 @@
 import rutaSchema from "../models/ruta.model.js";
 
-export const getAlltasks = async (req,res)=>{
+export const getAllRutas = async (req,res)=>{
 
     try{
         const lostal = await rutaSchema.find();
@@ -12,17 +12,17 @@ export const getAlltasks = async (req,res)=>{
 
 }
 
-// export const getTasks = async (req,res)=>{
+// export const getRutas = async (req,res)=>{
 //     try{
-//         const tasks = await rutaSchema.find({
+//         const Rutas = await rutaSchema.find({
 //             motoviajero: req.motoviajero.id
 //         }).populate('motoviajero');
-//         res.json(tasks)
+//         res.json(Rutas)
 //     }catch(err){
 //         return res.status(500).json({message: 'Something went wrong'})
 //     }
 // };
-export const createTasks = async (req,res)=>{
+export const createRutas = async (req,res)=>{
   try{
     const {nom_ruta,p_inicio_rut,geo_ini_rut,p_final_rut,geo_fin_rut,descripcion_rut,km_total_rut,geo_parada,nom_parada,desc_parada} = req.body;
     const newTask = new rutaSchema({
@@ -45,7 +45,7 @@ export const createTasks = async (req,res)=>{
     return res.status(500).json({message: 'Something went wrong'});
   }
 };
-export const getTask = async (req,res)=>{
+export const getRuta = async (req,res)=>{
  try{
     const task =  await rutaSchema.findById(req.params.id)
     if(!task) return res.status(404).json({message:'ruta no encontrada'})
@@ -55,7 +55,7 @@ export const getTask = async (req,res)=>{
  }
 };
 
-export const deleteTasks = async (req,res)=>{
+export const deleteRutas = async (req,res)=>{
  try{
     const task =  await rutaSchema.findByIdAndDelete(req.params.id)
     if(!task) return res.status(404).json({message:'ruta no encontrada'})
@@ -64,7 +64,7 @@ export const deleteTasks = async (req,res)=>{
     return res.status(404).json({message:'ruta no encontrada'})
  }
 };
-export const updateTasks = async (req,res)=>{
+export const updateRutas = async (req,res)=>{
     try{
         const task =  await rutaSchema.findByIdAndUpdate(req.params.id,req.body,{
             new: true
