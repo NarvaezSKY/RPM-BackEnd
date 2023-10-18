@@ -66,7 +66,7 @@ export const updateMotoviajero = async (req, res)=>{
 
 export const getMotoviajero = async (req, res) => {
     try {
-        const motoviajero = await Motoviajero.findById(req.params.id).populate('motoviajero');
+        const motoviajero = await motoviajero.findById(req.params.id).populate('motoviajero');
         res.json(motoviajero);
     } catch (error) {
         res.json({ error });
@@ -75,7 +75,7 @@ export const getMotoviajero = async (req, res) => {
 
 export const deleteMotoviajero = async (req, res) => {
     try {
-        const motoviajero = await Motoviajero.findByIdAndDelete(req.params.id, req.body, {
+        const motoviajero = await motoviajero.findByIdAndDelete(req.params.id, req.body, {
             new: true
         });
         res.json({ message: 'Motoviajero eliminado' });
