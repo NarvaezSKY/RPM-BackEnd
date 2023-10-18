@@ -15,7 +15,7 @@ const motos = new mongoose.Schema({
         required: true,
     },
     placa_moto:{
-        type: mongoose.Schema.ObjectId,
+        type:String,
         required: true,
         unique: true
     },
