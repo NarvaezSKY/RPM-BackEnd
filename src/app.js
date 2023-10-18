@@ -3,6 +3,7 @@ import morgan from "morgan";
 import authRoutes from './routes/auth.routes.js';
 import  cookieParser from 'cookie-parser';
 import taskRoutes from './routes/task.routes.js';
+import motoviajerosRoutes from "./routes/motoviajeros.routes.js";
 // import cors from 'cors';
 
 
@@ -18,5 +19,7 @@ App.use(cookieParser());
 
 App.use("/api",authRoutes);
 App.use("/api",taskRoutes);
+App.use("/motoviajeros",motoviajerosRoutes);
+
 
 export default App;
