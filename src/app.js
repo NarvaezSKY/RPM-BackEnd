@@ -6,6 +6,7 @@ import taskRoutes from './routes/task.routes.js';
 import rutaRoutes from './routes/ruta.routes.js';
 import pptoRoutes from './routes/ppto.routes.js';
 import motosRoutes from './routes/motos.routes.js'
+import motoviajerosRoutes from "./routes/motoviajeros.routes.js";
 // import cors from 'cors';
 
 
@@ -24,5 +25,7 @@ App.use("/api",motosRoutes);
 App.use("/api",taskRoutes);
 App.use("/api",rutaRoutes);
 App.use("/api",pptoRoutes);
+App.use("/motoviajeros",motoviajerosRoutes);
+
 
 export default App;
