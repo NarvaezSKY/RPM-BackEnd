@@ -44,6 +44,12 @@ const motoviajeroShema= new Schema({
     },
     numero_id:{
         type: Number
+    },
+    email_mv:{
+        type: String
+    },
+    password_mv:{
+        type: String
     }
 
 

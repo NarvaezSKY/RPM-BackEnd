@@ -1,8 +1,8 @@
 
 
 import motoviajero from "../models/motoviajeros.models.js";
-
-
+import bcrypt from "bcryptjs";
+import { createAccessToken } from '../libs/jwt.js';
 
 export const getAllMotoviajeros= async(req, res)=>{
 
@@ -19,9 +19,12 @@ export const getAllMotoviajeros= async(req, res)=>{
 
 export const createMotoviajero= async(req, res)=>{
 
-    const {alias_mv, nombre1_mv,nombre2_mv,ape1_mv,ape2_mv,nacionalidad,genero,celular_mv,fecha_na_mv,link_redso,nom_redso,numero_id }= req.body
+    const {alias_mv, nombre1_mv,nombre2_mv,ape1_mv,ape2_mv,nacionalidad,genero,celular_mv,fecha_na_mv,link_redso,nom_redso,numero_id, email_mv, password_mv }= req.body
 
     try {
+
+
+        const passwordHash=  await bcrypt.hash(password_mv, 10)
         const newMotoviajero=   new motoviajero({
             alias_mv,
             nombre1_mv,
@@ -34,11 +37,18 @@ export const createMotoviajero= async(req, res)=>{
             fecha_na_mv,
             link_redso,
             nom_redso,
-            numero_id
+            numero_id,
+            email_mv,
+            password_mv: passwordHash
     
     
         })
-        const hola= newMotoviajero.save()
+        const motoviajeroSaved= newMotoviajero.save();
+
+        const token= createAccessToken({id: motoviajeroSaved._id});
+
+        res.cookie('token', token)
+
         res.json({message: 'usuario creado'})
         
     } catch (error) {
