@@ -1,10 +1,11 @@
-import  express  from "express";
+import express from "express";
 import morgan from "morgan";
 import authRoutes from './routes/auth.routes.js';
-import  cookieParser from 'cookie-parser';
+import cookieParser from 'cookie-parser';
 import taskRoutes from './routes/task.routes.js';
 import rutaRoutes from './routes/ruta.routes.js';
 import pptoRoutes from './routes/ppto.routes.js';
+import motosRoutes from './routes/motos.routes.js'
 // import cors from 'cors';
 
 
@@ -19,6 +20,7 @@ App.use(express.json());
 App.use(cookieParser());
 
 App.use("/api",authRoutes);
+App.use("/api",motosRoutes);
 App.use("/api",taskRoutes);
 App.use("/api",rutaRoutes);
 App.use("/api",pptoRoutes);
