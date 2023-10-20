@@ -15,8 +15,6 @@ export const getAllusers = async (req,res)=>{
     }catch(err){
         res.send({message:"Sin ti, yo no me siento bien. Na' más de mil en cien. Viviendo y por dentro muerto. Hasta un ciego lo ve"})
     }
-   
-
 }
 
 export const register = async (req,res)=> {
@@ -35,8 +33,6 @@ export const register = async (req,res)=> {
             password: passwordHash,
         });
 
-
-
         const userSaved = await newUser.save();
         const token = await createAccessToken({id:userSaved._id});
         res.cookie('token',token);
@@ -52,7 +48,6 @@ export const register = async (req,res)=> {
         res.status(500).json({message:err.message})
     }
 };
-
 
 export const login = async (req,res)=> {
     const {email,password} = req.body

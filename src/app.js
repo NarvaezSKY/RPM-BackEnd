@@ -4,6 +4,7 @@ import authRoutes from './routes/auth.routes.js';
 import  cookieParser from 'cookie-parser';
 import taskRoutes from './routes/task.routes.js';
 import rutaRoutes from './routes/ruta.routes.js';
+import pptoRoutes from './routes/ppto.routes.js';
 // import cors from 'cors';
 
 
@@ -20,5 +21,6 @@ App.use(cookieParser());
 App.use("/api",authRoutes);
 App.use("/api",taskRoutes);
 App.use("/api",rutaRoutes);
+App.use("/api",pptoRoutes);
 
 export default App;
