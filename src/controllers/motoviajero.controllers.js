@@ -45,7 +45,7 @@ export const createMotoviajero= async(req, res)=>{
         })
         const motoviajeroSaved= newMotoviajero.save();
 
-        const token= createAccessToken({id: motoviajeroSaved._id});
+        const token= await createAccessToken({id: motoviajeroSaved._id});
 
         res.cookie('token', token)
 
@@ -57,6 +57,31 @@ export const createMotoviajero= async(req, res)=>{
     }
 
 }
+
+export const login = async (req,res)=> {
+    const {email_mv,password_mv} = req.body
+    try{
+
+        const userFound = await motoviajero.findOne({email_mv});
+        if(!userFound) return res.status(400).json({message: "User not found"})
+        const isMatch = bcrypt.compare(password_mv, userFound.password_mv);
+
+        if(!isMatch) return res.status(400).json({message: "incorrect password"});
+
+        const token = await createAccessToken({id:userFound._id});
+        res.cookie('token',token);
+        res.json({
+            id : userFound._id,
+            username : userFound.username,
+            email_mv : userFound.email_mv,
+            createdAt: userFound.createdAt,
+            updatedAt: userFound.updatedAt,
+        });
+
+    }catch(err){
+        res.status(500).json({message:err.message})
+    }
+};
 
 
 

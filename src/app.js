@@ -25,7 +25,7 @@ App.use("/api",motosRoutes);
 App.use("/api",taskRoutes);
 App.use("/api",rutaRoutes);
 App.use("/api",pptoRoutes);
-App.use("/motoviajeros",motoviajerosRoutes);
+App.use("/api",motoviajerosRoutes);
 
 
 export default App;
