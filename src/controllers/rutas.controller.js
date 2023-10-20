@@ -12,16 +12,18 @@ export const getAllRutas = async (req,res)=>{
 
 }
 
-// export const getRutas = async (req,res)=>{
-//     try{
-//         const Rutas = await rutaSchema.find({
-//             motoviajero: req.motoviajero.id
-//         }).populate('motoviajero');
-//         res.json(Rutas)
-//     }catch(err){
-//         return res.status(500).json({message: 'Something went wrong'})
-//     }
-// };
+export const getRutas = async (req,res)=>{
+    try{
+        const Rutas = await rutaSchema.find({
+            motoviajero: req.motoviajero.id
+        }).populate('motoviajero');
+        res.json(Rutas)
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({message: 'Something went wrong'});
+       
+    }
+};
 export const createRutas = async (req,res)=>{
   try{
     const {nom_ruta,p_inicio_rut,geo_ini_rut,p_final_rut,geo_fin_rut,descripcion_rut,km_total_rut,geo_parada,nom_parada,desc_parada} = req.body;
@@ -36,7 +38,7 @@ export const createRutas = async (req,res)=>{
         geo_parada,
         nom_parada,
         desc_parada,
-        // motoviajero: req.user.id
+        motoviajero: req.motoviajero.id
     })
 
     const savedTask = await newTask.save();
@@ -47,7 +49,7 @@ export const createRutas = async (req,res)=>{
 };
 export const getRuta = async (req,res)=>{
  try{
-    const task =  await rutaSchema.findById(req.params.id)
+    const task =  await rutaSchema.findById(req.params.id).populate('motoviajero');
     if(!task) return res.status(404).json({message:'ruta no encontrada'})
     res.json(task);
  }catch(err){

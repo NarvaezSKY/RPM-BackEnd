@@ -45,10 +45,8 @@ const motoviajeroShema= new Schema({
     numero_id:{
         type: Number
     }
-
-
-
-
+},{
+    timestamps:true
 })
 
 export default model('motoviajero', motoviajeroShema)

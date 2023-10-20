@@ -48,6 +48,9 @@ export const createMotoviajero= async(req, res)=>{
 
 }
 
+
+
+
 export const updateMotoviajero = async (req, res)=>{
     
     try {

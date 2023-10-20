@@ -41,11 +41,11 @@ const rutaSchema = new mongoose.Schema({
         type: String,
         required: true,
      },
-    // motoviajero:{
-    //     type: mongoose.Schema.ObjectId,
-    //     ref:'motovijero',
-    //     required: true
-    // }
+    motoviajero:{
+        type: mongoose.Schema.ObjectId,
+        ref:'motoviajero',
+        required: true
+    }
 },{
     timestamps:true
 }
