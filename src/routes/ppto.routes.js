@@ -6,11 +6,12 @@ import {getPpto,createPptos,updatePptos,deletePptos,getAllPpto} from '../control
 
 const router = Router();
 
-// router.get('/pptos',getPptos);
+// router.get('/pptos',getPpto);
+router.get('/pptos',getAllPpto);
 router.get('/pptos/:id',getPpto);
 router.post('/pptos',createPptos);
 router.delete('/pptos/:id',deletePptos);
 router.put('/pptos/:id',updatePptos);
-router.get('/pptoall',getAllPpto);
+
 
 export default router;
