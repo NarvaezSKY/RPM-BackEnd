@@ -20,9 +20,11 @@ App.use(morgan('dev'));
 App.use(express.json());
 App.use(cookieParser());
 
-App.use("/api",authRoutes);
+// App.use("/api",authRoutes);
+// App.use("/api",taskRoutes);
+
+
 App.use("/api",motosRoutes);
-App.use("/api",taskRoutes);
 App.use("/api",rutaRoutes);
 App.use("/api",pptoRoutes);
 App.use("/api",motoviajerosRoutes);

@@ -64,7 +64,7 @@ export const login = async (req,res)=> {
 
         const userFound = await motoviajero.findOne({email_mv});
         if(!userFound) return res.status(400).json({message: "User not found"})
-        const isMatch = bcrypt.compare(password_mv, userFound.password_mv);
+        const isMatch = await bcrypt.compare(password_mv, userFound.password_mv);
 
         if(!isMatch) return res.status(400).json({message: "incorrect password"});
 
@@ -72,7 +72,7 @@ export const login = async (req,res)=> {
         res.cookie('token',token);
         res.json({
             id : userFound._id,
-            username : userFound.username,
+            alias_mv : userFound.alias_mv,
             email_mv : userFound.email_mv,
             createdAt: userFound.createdAt,
             updatedAt: userFound.updatedAt,
@@ -82,6 +82,14 @@ export const login = async (req,res)=> {
         res.status(500).json({message:err.message})
     }
 };
+
+
+export const logout = (req, res) => {
+    res.cookie('token',"",{
+        expires: new Date(0)
+    })
+    return res.sendStatus(200);
+}
 
 
 
