@@ -5,6 +5,7 @@ const motos = new mongoose.Schema({
     nombre_moto:{
         type: String,
         required: false,
+        default: "Mi moto"
     },
     marca_moto:{
         type: String,
@@ -23,8 +24,20 @@ const motos = new mongoose.Schema({
         type: Number,
         required: true
     },
+    consumo:{
+        type: Number,
+        default: 0
+    },
+    motoviajero:{
+        type: mongoose.Schema.ObjectId,
+        ref:'motoviajero',
+        required: true
+    },
+    isSelected: {
+        type: Boolean, default: false 
+    }
 },{
-    timestamps:true
+    timestamps:false
 }
 );
 

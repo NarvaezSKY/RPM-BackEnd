@@ -1,11 +1,13 @@
 import Ruta from "../models/ruta.model.js";
-
+import motos from "../models/motos.model.js";
+import { json } from "express";
 export const getAllRutas = async (req,res)=>{
 
     try{
         const rutasUsuario = await Ruta.find({
             motoviajero: req.user.id
         }). populate('motoviajero')
+        .populate('moto')
         res.json(rutasUsuario);
     }catch(err){
         res.send(err)
@@ -14,38 +16,38 @@ export const getAllRutas = async (req,res)=>{
 
 }
 
-// export const getRutas = async (req,res)=>{
-//     try{
-//         const Rutas = await Ruta.find({
-//             motoviajero: req.user.id
-//         }).populate('motoviajero');
-//         res.json(Rutas)
-//     }catch(err){
-//         console.log(err);
-//         return res.status(500).json({message: err});
-       
-//     }
-// };
+
 export const createRutas = async (req,res)=>{
-  try{
     const {nom_ruta,p_inicio_rut,geo_ini_rut,p_final_rut,geo_fin_rut,descripcion_rut,km_total_rut,geo_parada,nom_parada,desc_parada} = req.body;
+  try{
+        const motoExiste = await motos.findOne({ isSelected: true });
+        if(!motoExiste) return res.json('Registre o seleccione una moto primero  SAPO CARECHIMBA')
+        
 
-    const newRuta =  new Ruta({
-        nom_ruta,
-        p_inicio_rut,
-        geo_ini_rut,
-        p_final_rut,
-        geo_fin_rut,
-        descripcion_rut,
-        km_total_rut,
-        geo_parada,
-        nom_parada,
-        desc_parada,
-        motoviajero: req.user.id   //user por que se esta pasando user de la validacion del token 
-    })
+        
+        const newRuta =  new Ruta({
+            nom_ruta,
+            p_inicio_rut,
+            geo_ini_rut,
+            p_final_rut,
+            geo_fin_rut,
+            descripcion_rut,
+            km_total_rut,
+            geo_parada,
+            nom_parada,
+            desc_parada,
+            motoviajero: req.user.id,   //user por que se esta pasando user de la validacion del token
+            moto: motoExiste._id   //el id de la moto  
+        })
 
-    const savedRuta = await newRuta.save();  
-    res.json(savedRuta);
+        const savedRuta = await newRuta.save();  
+        res.json(savedRuta);
+
+        
+        
+        
+        
+       
   }catch(err){
     console.log(err);
     return res.status(500).json({message: err});

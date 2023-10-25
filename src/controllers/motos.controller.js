@@ -1,75 +1,69 @@
 import motos from '../models/motos.model.js';
-import Task from '../models/motos.model.js'
+
 
 export const getAllmotos = async (req,res)=>{
-    // const {username,password,email} = req.body;
     try{
-        const lostal = await motos.find();
-        res.json(lostal);
+        const allMotos = await motos.find({
+            motoviajero: req.user.id
+        });
+        res.json(allMotos);
     }catch(err){
-        res.send({message:"Sin ti, yo no me siento bien. Na' más de mil en cien. Viviendo y por dentro muerto. Hasta un ciego lo ve"})
+        res.send({message: err})
     }
 }
 
-export const getTasks = async (req,res)=>{
+export const getOneMoto = async (req,res)=>{
     try{
-        const tasks = await Task.find({
-            user: req.user.id
-        });
-        res.json(tasks)
+        const moto = await motos.findById(req.params.id)
+        res.json(moto)
     }catch(err){
-        return res.status(500).json({message: 'Algo salio mal, tal vez fuiste vos del vientre de tu cucha'+`error: ${err}`})
+        return res.status(500).json({message: err})
     }
 };
 
-export const createTasks = async (req,res)=>{
+export const createMoto = async (req,res)=>{
   try{
-    const {nombre_moto,marca_moto,año_moto, placa_moto, cilindraje_moto} = req.body;
-    const newTask = new Task({
+    const {nombre_moto,marca_moto,año_moto, placa_moto, cilindraje_moto, consumo} = req.body;
+    const newMoto = new motos({
         nombre_moto,
         marca_moto,
         año_moto,
         placa_moto,
         cilindraje_moto,
+        consumo,
+        motoviajero: req.user.id
         
     })
 
-    const savedTask = await newTask.save();
-    res.json(savedTask);
+    const savedMoto = await newMoto.save();
+    res.json(savedMoto);
   }catch(err){
-    return res.status(500).json({message: 'Algo salio mal, tal vez fuiste vos del vientre de tu cucha'});
+    return res.status(500).json({message: 'createMotoNotFund'});
+    // console.log(err)
   }
 };
 
-export const getTask = async (req,res)=>{
- try{
-    const task =  await Task.findById(req.params.id).populate('user');
-    if(!task) return res.status(404).json({message:'task not found'})
-    res.json(task);
- }catch(err){
-    return res.status(404).json({message:'task not found'})
- }
-};
 
-export const deleteTasks = async (req,res)=>{
+
+export const deleteMoto = async (req,res)=>{
  try{
-    const task =  await Task.findByIdAndDelete(req.params.id)
-    if(!task) return res.status(404).json({message:'task not found'})
+    const moto =  await motos.findByIdAndDelete(req.params.id)
+    if(!moto) return res.status(404).json({message:'No hay motos para eliminar'})
     return res.sendStatus(204);
  }catch(err){
     return res.status(404).json({message:'task not found'})
  }
 };
 
-export const updateTasks = async (req,res)=>{
+export const updateMoto = async (req,res)=>{
     try{
-        const task =  await Task.findByIdAndUpdate(req.params.id,req.body,{
+        const updatedMoto =  await motos.findByIdAndUpdate(req.params.id,req.body,{
             new: true
         })
-        if(!task) return res.status(404).json({message:'task not found'})
-        res.json(task);
-    }catch{
-        return res.status(404).json({message:'task not found'})
+        if(!updateMoto) return res.status(404).json({message:'task not found'})
+        res.json(updatedMoto);
+    }catch(error){
+        console.log(error)
     }
 };
 

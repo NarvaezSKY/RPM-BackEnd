@@ -1,16 +1,16 @@
 import { Router } from "express";
-import {authRequired} from '../middlewares/validateToken.js';
-import {getTasks,getTask,createTasks,updateTasks,deleteTasks,getAllmotos} from '../controllers/motos.controller.js';
-import { validateSchema } from "../middlewares/validator.middleware.js";
-import { createTaskSchema } from "../schemas/task.chema.js";
+import {getOneMoto,createMoto,updateMoto,deleteMoto, getAllmotos} from '../controllers/motos.controller.js';
+
+import {authRequired  } from "../middlewares/validateToken.js";
+
 
 const router = Router();
 
 
-router.get('/motos/:id',getTask);
-router.post('/motos',createTasks);
-router.delete('/motos/:id',deleteTasks);
-router.put('/motos/:id',updateTasks);
-router.get('/motos',getAllmotos);
+router.get('/motos',authRequired,getAllmotos);
+router.post('/motos',authRequired,createMoto);
+router.get('/motos/:id',authRequired,getOneMoto);
+router.delete('/motos/:id',authRequired,deleteMoto);
+router.put('/motos/:id',authRequired,updateMoto);
 
 export default router;

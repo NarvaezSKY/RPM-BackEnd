@@ -9,7 +9,10 @@ router.get('/rutas/:id',authRequired,getRuta);
 router.post('/rutas',authRequired,createRutas);
 router.delete('/rutas/:id',authRequired,deleteRutas);
 router.put('/rutas/:id',authRequired,updateRutas);
-// router.get('/rutaall',getAllRutas);  //pa q si solo queremos la ruta del usuario, no debe obtener rutas de otros
+
+
+//rutas admin
+// router.get('/admin/rutas',adminRequired,getAllRutas); //conttinuara
 
 
 //todas funcionales con authRequired sisi  

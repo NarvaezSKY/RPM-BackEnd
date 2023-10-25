@@ -1,6 +1,5 @@
 import express from "express";
 import morgan from "morgan";
-import authRoutes from './routes/auth.routes.js';
 import cookieParser from 'cookie-parser';
 import taskRoutes from './routes/task.routes.js';
 import rutaRoutes from './routes/ruta.routes.js';
@@ -20,7 +19,6 @@ App.use(morgan('dev'));
 App.use(express.json());
 App.use(cookieParser());
 
-// App.use("/api",authRoutes);
 // App.use("/api",taskRoutes);
 
 
